@@ -1,12 +1,7 @@
 <div class="w-full">
-  <% if notice.present? %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
-  <% end %>
-
   <div class="flex justify-between items-center">
     <h1 class="font-bold text-4xl">Users</h1>
   </div>
-
   <div class="min-w-full my-8">
     <div class="table font-bold min-w-full">
       <div>Name</div>
@@ -15,7 +10,7 @@
       <div>Phone</div>
       <div></div>
     </div>
-    <%= render "form", user: User.new %>
+    <%= turbo_frame_tag "new-user-form", src: new_user_path %>
     <div id="users">
       <%= render @users %>
     </div>

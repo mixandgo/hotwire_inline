@@ -1,20 +1,20 @@
 <%= form_with model: user, id: dom_id(user, "form"), class: "table min-w-full" do |form| %>
   <div>
     <%= form.text_field :name, class: "block rounded-md border border-gray-200 outline-none px-3 py-2  w-full" %>
+    <%= inline_error_for(:name, user) %>
   </div>
-
   <div>
     <%= form.text_field :email, class: "block rounded-md border border-gray-200 outline-none px-3 py-2  w-full" %>
+    <%= inline_error_for(:email, user) %>
   </div>
-
   <div>
     <%= form.date_field :dob, class: "block rounded-md border border-gray-200 outline-none px-3 py-2  w-full datefield" %>
+    <%= inline_error_for(:dob, user) %>
   </div>
-
   <div>
     <%= form.text_field :phone, class: "block rounded-md border border-gray-200 outline-none px-3 py-2  w-full" %>
+    <%= inline_error_for(:phone, user) %>
   </div>
-
   <div class="inline">
     <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
   </div>
