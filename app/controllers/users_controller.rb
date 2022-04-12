@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  include ActionView::RecordIdentifier
   before_action :set_user, only: %i[ show edit update destroy ]
 
   def index
@@ -19,7 +20,10 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to user_url(@user), notice: "User was successfully created."
+      render turbo_stream: [
+        turbo_stream.prepend("users", @user),
+        turbo_stream.replace("form_user", partial: "form", locals: { user: User.new })
+      ]
     else
       render :new, status: :unprocessable_entity
     end
@@ -27,7 +31,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to user_url(@user), notice: "User was successfully updated."
+      render @user
     else
       render :edit, status: :unprocessable_entity
     end
@@ -36,7 +40,9 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
 
-    redirect_to users_url, notice: "User was successfully destroyed."
+    render turbo_stream: [
+      turbo_stream.remove(@user)
+    ]
   end
 
   private

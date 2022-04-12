@@ -5,10 +5,19 @@
 
   <div class="flex justify-between items-center">
     <h1 class="font-bold text-4xl">Users</h1>
-    <%= link_to 'New user', new_user_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
 
-  <div id="users" class="min-w-full">
-    <%= render @users %>
+  <div class="min-w-full my-8">
+    <div class="table font-bold min-w-full">
+      <div>Name</div>
+      <div>Email</div>
+      <div>Age</div>
+      <div>Phone</div>
+      <div></div>
+    </div>
+    <%= render "form", user: User.new %>
+    <div id="users">
+      <%= render @users %>
+    </div>
   </div>
 </div>
